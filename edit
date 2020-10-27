@@ -1,0 +1,47 @@
+#!/bin/bash -
+
+#check if an argument is provided
+
+if [ -z $EDITOR ]; then
+	echo "EDITOR variable not set. Defaulting to vi..."
+	EDITOR=/usr/bin/vi
+fi
+
+if [ -z $1 ]
+then
+	#open editor only,  no argument is provided
+	$EDITOR
+else
+	#test if file exists
+	if [ ! -f $1 ]
+	then
+		#file don't exist, destination folder permissions apply
+		FILE_PATH=$1
+		DESTINATION_FOLDER_PATH=${FILE_PATH%/*}
+		#test if path or filename is provided
+		if [ $FILE_PATH == $DESTINATION_FOLDER_PATH ]
+		then
+			#destination folder path is current working directory
+			DESTINATION_FOLDER_PATH=$PWD
+		fi
+		#check if destination folder is writable by user
+		if [ -w $DESTINATION_FOLDER_PATH ]
+		then
+			#open editor as ordinary user
+			$EDITOR $FILE_PATH
+		else
+			#open editor as sudo user
+			sudo $EDITOR $FILE_PATH
+		fi
+	#file exists, file permissions apply
+	else
+		if [ -w $1 ]
+		then
+			#open editor as current user
+			$EDITOR $1
+		else
+			#open editor as sudo user
+			sudo $EDITOR $1
+		fi
+	fi
+fi
