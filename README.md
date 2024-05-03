@@ -10,7 +10,7 @@ Simply said, it saves both time and nerves.
 Set up `VIM_PATH` variable in your `.bashrc` or `.zshrc` file:
 
 ```shell
-echo export VIM_PATH=&(which vim) >> ~/.zshrc
+echo export VIM_PATH=$(which vim) >> ~/.zshrc
 ```
 
 Use `curl` or `wget` command to download and install vim script:
