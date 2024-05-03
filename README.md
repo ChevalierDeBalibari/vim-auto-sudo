@@ -1,25 +1,17 @@
 # vim-auto-sudo
 
-Small wrapper scrit around vim editor. It will automatically ask for sudo password
+Small wrapper script around vim editor. It will automatically ask for sudo password
 when editing some root owned configuration files.
 
-Simply it saves both time and nerves.
+Simply said, it saves both time and nerves.
 
 ## Installation 
-
-Check path where your vim is installed:
-
-```shell
-which vim
-```
 
 Set up `VIM_PATH` variable in your `.bashrc` or `.zshrc` file:
 
 ```shell
-export VIM_PATH=/usr/bin/vim
+echo export VIM_PATH=&(which vim) >> ~/.zshrc
 ```
-
-Use path provided by `which` command.
 
 Use `curl` or `wget` command to download and install vim script:
 
